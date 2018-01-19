@@ -1,0 +1,19 @@
+---
+- name: Fix SSH and Setup root Password
+  hosts: all
+  sudo: yes
+
+  tasks:
+    - name: Change root password
+      user: name=root update_password=always password=$6$jAPFm5nFdf$Jjo.LwE/Zra.3mBzHt/J3pyeD5QjA3IctFb4.Lf7n4T4576zoaRTlXy/wFuc0BnYplwaKF2xDMonPVBE980VU0
+
+    - name: Enable root SSH access
+      lineinfile: dest=/etc/ssh/sshd_config
+                  regexp="^PermitRootLogin"
+                  line="PermitRootLogin yes"
+                  state=present
+      notify: Restart ssh
+
+  handlers:
+    - name: Restart ssh
+      service: name=ssh state=restarted

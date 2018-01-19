@@ -1,0 +1,7 @@
+---
+- name: k8s-cbuilder
+  box: Xenial64-250G 
+  ram: 32768
+  cpus: 4
+  ip-mgmt: 10.13.82.36
+  ip-control-data: 192.168.1.36
